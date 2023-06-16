@@ -1,35 +1,21 @@
-import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
-import 'react-tabs/style/react-tabs.css';
-import { Container, Header, Section, Text } from 'components';
-import { Gallery, Todos } from 'tabs';
+import { Navigate, Route, Routes } from 'react-router-dom';
+import { Layout } from 'layout';
+import { Cast, Home, MovieDetails, Movies, Reviews } from 'pages';
+import { ROUTES } from 'utils/routes';
 
 export const App = () => {
   return (
-    <>
-      <Header />
+    <Routes>
+      <Route path={ROUTES.HOME} element={<Layout />}>
+        <Route index element={<Home />} />
+        <Route path={ROUTES.MOVIES} element={<Movies />} />
+        <Route path={ROUTES.MOVIE_DETAIL} element={<MovieDetails />}>
+          <Route path={ROUTES.CAST} element={<Cast />} />
+          <Route path={ROUTES.REVIEWS} element={<Reviews />} />
+        </Route>
 
-      <Section>
-        <Container>
-          <Tabs>
-            <TabList>
-              <Tab>
-                <Text>Gallery</Text>
-              </Tab>
-              <Tab>
-                <Text>Todos</Text>
-              </Tab>
-            </TabList>
-
-            <TabPanel>
-              <Gallery />
-            </TabPanel>
-
-            <TabPanel>
-              <Todos />
-            </TabPanel>
-          </Tabs>
-        </Container>
-      </Section>
-    </>
+        <Route path="*" element={<Navigate to={ROUTES.HOME} replace />} />
+      </Route>
+    </Routes>
   );
 };
