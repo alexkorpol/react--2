@@ -1,6 +1,8 @@
 import * as React from 'react';
 
+import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
+import { Outlet } from 'react-router-dom';
 import { Header } from './Header';
 
 export const Layout = () => {
@@ -9,11 +11,9 @@ export const Layout = () => {
       <Header />
 
       <main>
-        <Container maxWidth="xl">
-          <h1>Layout</h1>
-
-          {/*{children}*/}
-        </Container>
+        <Box as="section" sx={{ py: 5 }}>
+          <Container maxWidth="xl">{<Outlet />}</Container>
+        </Box>
       </main>
     </div>
   );
